@@ -238,7 +238,8 @@ def predict(image):
         visible_mask,
         overlay,
         tumor_percentage,
-        confidence
+        confidence,
+        binary_mask
     )
 
 # =========================================================
@@ -267,8 +268,34 @@ if uploaded_file is not None:
             mask,
             overlay,
             tumor_percentage,
-            confidence
+            confidence,
+            binary_mask
         ) = predict(image)
+
+        # ----------------------------------
+        # SEVERITY ANALYSIS
+        # ----------------------------------
+        if tumor_percentage > 20:
+
+            severity = "High"
+
+        elif tumor_percentage > 5:
+
+            severity = "Moderate"
+
+        elif tumor_percentage > 0:
+
+            severity = "Low"
+
+        else:
+
+            severity = "None"
+
+
+       
+
+
+
 
     st.success("✅ Analysis Completed Successfully")
 
@@ -278,7 +305,7 @@ if uploaded_file is not None:
     # METRICS SECTION
     # =====================================================
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(2)
 
     with col1:
 
@@ -292,6 +319,13 @@ if uploaded_file is not None:
         st.metric(
             "Confidence Score",
             f"{confidence:.2f}%"
+        )
+
+    with col3:
+
+        st.metric(
+            "Severity",
+            severity
         )
 
     st.markdown("---")
