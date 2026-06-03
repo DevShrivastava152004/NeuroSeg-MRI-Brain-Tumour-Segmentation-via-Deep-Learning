@@ -334,7 +334,6 @@ if uploaded_file is not None:
     # FINDINGS
     # =========================================================
 
-    st.subheader("📋 Findings")
 
     st.info(
         f"""
@@ -347,6 +346,38 @@ if uploaded_file is not None:
         Model Confidence: {confidence:.2f}%
         """
     )
+
+    # =========================================================
+    # IMPRESSION
+    # =========================================================
+
+    st.subheader("🩺 Impression")
+
+    if severity == "Low":
+
+        impression = """
+        Small tumor-like region detected.
+        Findings suggest limited tumor involvement.
+        Further clinical evaluation is recommended.
+        """
+
+    elif severity == "Moderate":
+
+        impression = """
+        Moderate tumor-like region detected.
+        Findings indicate noticeable tumor involvement.
+        Radiological consultation is recommended.
+        """
+
+    else:
+
+        impression = """
+        Large tumor-like region detected.
+        Findings indicate significant tumor involvement.
+        Immediate specialist review is recommended.
+        """
+
+    st.warning(impression)
 
     # =====================================================
     # IMAGE DISPLAY
