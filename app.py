@@ -330,6 +330,24 @@ if uploaded_file is not None:
 
     st.markdown("---")
 
+    # =========================================================
+    # FINDINGS
+    # =========================================================
+
+    st.subheader("📋 Findings")
+
+    st.info(
+        f"""
+        A tumor-like region has been detected in the MRI scan.
+
+        Estimated Tumor Involvement: {tumor_percentage:.2f}%
+
+        Severity Level: {severity}
+
+        Model Confidence: {confidence:.2f}%
+        """
+    )
+
     # =====================================================
     # IMAGE DISPLAY
     # =====================================================
